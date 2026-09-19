@@ -5,8 +5,6 @@ A practical industrial telemetry pipeline that simulates edge device data, route
 This project demonstrates core Industrial Automation and IIoT concepts, including MQTT publish/subscribe architecture, time-series telemetry routing, and local data storage.
 
 ## 🏗️ Architecture Diagram
-
-
 graph TD
     A[Edge Simulator<br/>device_simulator.py] -- JSON via MQTT --> B((Mosquitto Broker<br/>Port 1883))
     B -- Telemetry Stream --> C[Python Gateway<br/>iiot_gateway.py]
