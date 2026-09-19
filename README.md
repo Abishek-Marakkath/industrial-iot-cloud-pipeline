@@ -6,24 +6,15 @@ This project demonstrates core Industrial Automation and IIoT concepts, includin
 
 ## 🏗️ Architecture Diagram
 
-`text
-[ Simulator ] --->JSON / MQTT ---> [ Mosquitto Broker ]
-(device_simulator.py) (Local: Port 1883)
-                                              |
-                                              v
-[ Dashboard ] <--- SQLite 3 <------ [ Python Gateway ]
-(dashboard.py)    (sensor_data.db)    (iiot_gateway.py)
 
-⚙️ Technology Stack
-Language: Python 3.11
-Message Broker: Eclipse Mosquitto (MQTT)
-Edge Communication: paho-mqtt
-Data Manipulation: pandas
-Visualization: streamlit
-Storage: SQLite3 (Local edge storage)
-
-🚀 Key Features
-Asynchronous Message Routing: Utilizes MQTT publish/subscribe architecture for lightweight, high-throughput device communication.
-JSON Payload Structuring: Packages telemetry data (temperature, pressure, timestamps, device IDs) into standardized JSON formats common in modern PLCs.
-Automated Persistence: A custom gateway script continuously listens to the broker and automatically parses and inserts new readings into a relational database.
-Real-Time Visualization: A web dashboard that automatically refreshes to display the latest edge readings and historical time-series trends.
+graph TD
+    A[Edge Simulator<br/>device_simulator.py] -- JSON via MQTT --> B((Mosquitto Broker<br/>Port 1883))
+    B -- Telemetry Stream --> C[Python Gateway<br/>iiot_gateway.py]
+    C -- SQL INSERT --> D[(SQLite Database<br/>sensor_data.db)]
+    D -- Live Queries --> E[Streamlit Dashboard<br/>dashboard.py]
+    
+    style A fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
+    style B fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    style C fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style D fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style E fill:#ffebee,stroke:#d32f2f,stroke-width:2px
